@@ -3,7 +3,7 @@
  */
 const deck = document.querySelector(".deck");
 let openedCards = [];
-let openedCardsNum = openedCards.length;
+//let openedCardsNum = openedCards.length;
 
 const iconsUnique = ["fa-anchor",
 "fa-bicycle",
@@ -71,14 +71,18 @@ createList();
 // jQuery's one() event binding method which implements one-time events
 // (each card can be clicked only once - 'clicked' as the event here)
 // https://www.sitepoint.com/create-one-time-events-javascript/
-$(".card").one( "click", function(clicked) { 
+
+$(".card").one( "click", (clicked) => {
+    openCard(clicked);
+});
+
+function openCard(clicked) {
     clicked.target.className = "card open show";
     countItems(clicked);
-});
+}
 
 function countItems(clicked) {
     let eventClass = clicked.target.firstChild.className;
     openedCards.push(eventClass);
-        console.log("CLICKS COUNT: " + openedCards.length);
-    return openedCardsNum;
+        console.log("CLICKS COUNT: " + openedCards.length);    
 }
