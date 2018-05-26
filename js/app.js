@@ -1,20 +1,23 @@
 /*
  * Create a list that holds all of your cards
  */
-const cardsUnique = ["fa fa-anchor",
-"fa fa-bicycle",
-"fa fa-bolt",
-"fa fa-bomb",
-"fa fa-cube",
-"fa fa-diamond",
-"fa fa-leaf",
-"fa fa-paper-plane-o"];
+const deck = document.querySelector(".deck");
+const cards = document.querySelectorAll(".card");
+const card = document.querySelector(".card");
 
-const cards = [...cardsUnique, ...cardsUnique];
+const iconsUnique = ["fa-anchor",
+"fa-bicycle",
+"fa-bolt",
+"fa-bomb",
+"fa-cube",
+"fa-diamond",
+"fa-leaf",
+"fa-paper-plane-o"];
 
-shuffle(cards);
-console.log(cards);
+const icons = [...iconsUnique, ...iconsUnique];
 
+shuffle(icons);
+console.log(icons);
 
 /*
  * Display the cards on the page
@@ -37,6 +40,21 @@ function shuffle(array) {
 
     return array;
 }
+
+//Create list of cards based on array and append to DOM
+function createList () {
+    for (icon of icons) {
+        let item = document.createElement("li");
+        let text = document.createElement("i");
+        item.classList.add("card");
+        text.classList.add("fa")
+        text.classList.add(icon);
+        item.appendChild(text);
+        deck.appendChild(item);
+    }
+}
+createList();
+
 
 
 /*
