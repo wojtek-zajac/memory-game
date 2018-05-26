@@ -1,6 +1,19 @@
 /*
  * Create a list that holds all of your cards
  */
+const cardsUnique = ["fa fa-anchor",
+"fa fa-bicycle",
+"fa fa-bolt",
+"fa fa-bomb",
+"fa fa-cube",
+"fa fa-diamond",
+"fa fa-leaf",
+"fa fa-paper-plane-o"];
+
+const cards = [...cardsUnique, ...cardsUnique];
+
+shuffle(cards);
+console.log(cards);
 
 
 /*
