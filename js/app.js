@@ -2,8 +2,8 @@
  * Create a list that holds all of your cards
  */
 const deck = document.querySelector(".deck");
-const cards = document.querySelectorAll(".card");
-const card = document.querySelector(".card");
+//const cards = document.querySelectorAll(".card");
+//const card = document.querySelector(".card");
 
 const iconsUnique = ["fa-anchor",
 "fa-bicycle",
@@ -47,23 +47,16 @@ function createList () {
         let item = document.createElement("li");
         let text = document.createElement("i");
         item.classList.add("card");
-        text.classList.add("fa")
-        text.classList.add(icon);
+        text.classList.add("fa", icon);
         item.appendChild(text);
         deck.appendChild(item);
     }
 }
 createList();
 
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+//Flip the card on click
+deck.addEventListener("click",function(e) {
+    if (e.target && e.target.matches("li.card")) {
+      e.target.className = "card open show";
+      } 
+  });
