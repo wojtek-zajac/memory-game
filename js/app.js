@@ -2,8 +2,8 @@
  * Create a list that holds all of your cards
  */
 const deck = document.querySelector(".deck");
-//const cards = document.querySelectorAll(".card");
-//const card = document.querySelector(".card");
+let openedCards = [];
+let openedCardsNum = openedCards.length;
 
 const iconsUnique = ["fa-anchor",
 "fa-bicycle",
@@ -52,11 +52,33 @@ function createList () {
         deck.appendChild(item);
     }
 }
+
 createList();
 
-//Flip the card on click
-deck.addEventListener("click",function(e) {
-    if (e.target && e.target.matches("li.card")) {
-      e.target.className = "card open show";
-      } 
-  });
+
+  /*
+ * set up the event listener for a card. If a card is clicked:
+ *  - display the card's symbol (put this functionality in another function that you call from this one)
+ *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+ *  - if the list already has another card, check to see if the two cards match
+ *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ */
+
+
+// jQuery's one() event binding method which implements one-time events
+// (each card can be clicked only once - 'clicked' as the event here)
+// https://www.sitepoint.com/create-one-time-events-javascript/
+$(".card").one( "click", function(clicked) { 
+    clicked.target.className = "card open show";
+    countItems(clicked);
+});
+
+function countItems(clicked) {
+    let eventClass = clicked.target.firstChild.className;
+    openedCards.push(eventClass);
+        console.log("CLICKS COUNT: " + openedCards.length);
+    return openedCardsNum;
+}
