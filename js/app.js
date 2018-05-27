@@ -1,6 +1,4 @@
 const deck = document.querySelector(".deck");
-let openedCards = [];
-
 const iconsUnique = ["fa-anchor",
                      "fa-bicycle",
                      "fa-bolt",
@@ -9,15 +7,10 @@ const iconsUnique = ["fa-anchor",
                      "fa-diamond",
                      "fa-leaf",
                      "fa-paper-plane-o"];
-
 const icons = [...iconsUnique, ...iconsUnique];
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+const movesContainer = document.querySelector(".moves");
+let openedCards = [];
+let moves = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -34,8 +27,10 @@ function shuffle(array) {
     return array;
 }
 
+
 //Create list of cards based on array and append to DOM
 function createList () {
+
     for (icon of icons) {
         let item = document.createElement("li");
         let text = document.createElement("i");
@@ -44,24 +39,28 @@ function createList () {
         item.appendChild(text);
         deck.appendChild(item);
     }
+
     deck.addEventListener("click", respondToTheClick);
 }
 
+
 function respondToTheClick(clicked) {
     let currentClick = clicked.target;
+
     if (clicked.target.nodeName === "LI") {
         console.log("LI was clicked -> event:");
         console.log(clicked);
-        //countItems(clicked); 
+
         openCard(clicked);       
     }
 }
 
+
 function openCard(clicked) {
     clicked.target.className = "card open show freeze";
     countItems(clicked);
-    //clicked.target.classList.toggle("freeze");
 }
+
 
 function countItems(clicked) {
     openedCards.push(clicked);
@@ -70,13 +69,14 @@ function countItems(clicked) {
     isPair();    
 }
 
+
 function isPair() {
     if (openedCards.length === 2) {
             console.log("You just clicked twice. I'm checking for a match: ");
-            //console.log(openedCards);
         checkMatch();
     }
 }
+
 
 function checkMatch() {
     deck.classList.toggle("freeze");
@@ -87,30 +87,52 @@ function checkMatch() {
     }
 }
 
+
 function match() {
     console.log("It's a match! I'm toggling the match style");
     openedCards[0].target.className = "card match freeze";
     openedCards[1].target.className = "card match freeze"
     deck.classList.toggle("freeze");
-emptyList();
+    countMove();
 }
+
 
 function waitToHide() {
     console.log("No match. I'm hiding the cards in 1s...");
-    setTimeout(hide, 1000);
+    setTimeout(hide, 600);
 }
+
 
 function hide() {
     openedCards[0].target.className = "card";
     openedCards[1].target.className = "card";
     deck.classList.toggle("freeze");
+    countMove();
+}
+
+
+function countMove() {
+    moves++;
+    displayMoves();
     emptyList();
+}
+
+
+function displayMoves() {
+    if (moves === 1) {
+        movesContainer.innerHTML = `${moves} Move`;
+    } else {
+        movesContainer.innerHTML = `${moves} Moves`;
+    }
 }
 
 function emptyList() {
     openedCards = [];
 }
 
+
 shuffle(icons);
 console.log(icons);
 createList();
+
+
