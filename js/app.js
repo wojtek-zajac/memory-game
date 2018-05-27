@@ -1,6 +1,4 @@
 const deck = document.querySelector(".deck");
-const cards = document.querySelectorAll(".card");
-const cardss = [...cards];
 const iconsUnique = ["fa-anchor",
                      "fa-bicycle",
                      "fa-bolt",
@@ -14,6 +12,10 @@ const movesContainer = document.querySelector(".moves");
 const restartButton = document.querySelector(".restart");
 let openedCards = [];
 let moves = 0;
+const stopwatchContainer = document.querySelectorAll('.stopwatch')[0];
+let time;
+let seconds = 0;
+let minutes = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -42,7 +44,6 @@ function createList () {
         item.appendChild(text);
         deck.appendChild(item);
     }
-
     deck.addEventListener("click", respondToTheClick);
 }
 
@@ -53,7 +54,6 @@ function respondToTheClick(clicked) {
     if (clicked.target.nodeName === "LI") {
         console.log("LI was clicked -> event:");
         console.log(clicked);
-
         openCard(clicked);       
     }
 }
@@ -107,10 +107,14 @@ function waitToHide() {
 
 
 function hide() {
+    resetCurrentCards();
+    countMove();
+}
+
+function resetCurrentCards() {
     openedCards[0].target.className = "card";
     openedCards[1].target.className = "card";
     deck.classList.toggle("freeze");
-    countMove();
 }
 
 
@@ -123,34 +127,91 @@ function countMove() {
 
 function displayMoves() {
     if (moves === 1) {
-        movesContainer.innerHTML = `${moves} Move`;
+        firstMoveSyntax();
     } else {
-        movesContainer.innerHTML = `${moves} Moves`;
+        pluralMovesSyntax()
     }
 }
+
+
+function firstMoveSyntax() {
+    movesContainer.innerHTML = `${moves} Move`;
+}
+
+
+function pluralMovesSyntax() {
+    movesContainer.innerHTML = `${moves} Moves`;
+}
+
 
 function restart() {
     emptyList();
     resetMoves();
-    ///cards.className = "card";
+    resetStopwatch();
     resetCards();
+    stopStopwatch();
+
+    $(".deck").one( "click", () => {
+        stopwatch();
+    });
 }
+
 
 function emptyList() {
     openedCards = [];
 }
+
 
 function resetMoves() {
     moves = 0;
     movesContainer.innerHTML = "";
 }
 
+
+function resetStopwatch() {
+    stopwatchContainer.textContent = "00:00";
+    seconds = 0; 
+    minutes = 0;
+}
+
+
+function stopStopwatch() {
+    clearTimeout(time);
+}
+
+
 function resetCards() {
     $("li").removeClass("match freeze open show");
 }
 
+
+function countSeconds() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+    }   
+    stopwatchContainer.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + 
+                                     (seconds > 9 ? seconds : "0" + seconds);
+    stopwatch();
+}
+
+
+function stopwatch() {
+    time = setTimeout(countSeconds, 1000);
+}
+
+
+//Event listeners
+$(".deck").one( "click", () => {
+    stopwatch();
+});
+
+
 restartButton.addEventListener("click", restart);
 
+
+//Call function
 shuffle(icons);
 console.log(icons);
 createList();
