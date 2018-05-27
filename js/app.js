@@ -1,23 +1,16 @@
-/*
- * Create a list that holds all of your cards
- */
 const deck = document.querySelector(".deck");
 let openedCards = [];
-//let openedCardsNum = openedCards.length;
 
 const iconsUnique = ["fa-anchor",
-"fa-bicycle",
-"fa-bolt",
-"fa-bomb",
-"fa-cube",
-"fa-diamond",
-"fa-leaf",
-"fa-paper-plane-o"];
+                     "fa-bicycle",
+                     "fa-bolt",
+                     "fa-bomb",
+                     "fa-cube",
+                     "fa-diamond",
+                     "fa-leaf",
+                     "fa-paper-plane-o"];
 
 const icons = [...iconsUnique, ...iconsUnique];
-
-shuffle(icons);
-console.log(icons);
 
 /*
  * Display the cards on the page
@@ -51,68 +44,66 @@ function createList () {
         item.appendChild(text);
         deck.appendChild(item);
     }
+    deck.addEventListener("click", respondToTheClick);
 }
 
-createList();
-
-
-  /*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
-
-// jQuery's one() event binding method which implements one-time events
-// (each card can be clicked only once - 'clicked' as the event here)
-// https://www.sitepoint.com/create-one-time-events-javascript/
-
-$(".card").one( "click", (clicked) => {
-    openCard(clicked);
-});
+function respondToTheClick(clicked) {
+    let currentClick = clicked.target;
+    if (clicked.target.nodeName === "LI") {
+        console.log("LI was clicked -> event:");
+        console.log(clicked);
+        //countItems(clicked); 
+        openCard(clicked);       
+    }
+}
 
 function openCard(clicked) {
-    clicked.target.className = "card open show";
+    clicked.target.className = "card open show froze";
     countItems(clicked);
+    //clicked.target.classList.toggle("frozen");
 }
 
 function countItems(clicked) {
-    let eventClass = clicked.target.firstChild.className;
-    openedCards.push(eventClass);
-        console.log("CLICKS COUNT: " + openedCards.length);
+    openedCards.push(clicked);
+            console.log("CLICKS COUNT: " + openedCards.length + "\nOPENED CARDS: ");
+            console.log(openedCards);
     isPair();    
+}
+
+function isPair() {
+    if (openedCards.length === 2) {
+            console.log("You just clicked twice. I'm checking for a match: ");
+            //console.log(openedCards);
+        checkMatch();
+    }
+}
+
+function checkMatch() {
+    if (openedCards[0].target.firstChild.className === openedCards[1].target.firstChild.className) {
+        match();
+    } else {
+        hide();
+    }
+}
+
+function match() {
+    console.log("It's a match! I'm toggling the match style");
+    openedCards[0].target.className = "card match freeze";
+    openedCards[1].target.className = "card match freeze"
+emptyList();
+}
+
+function hide() {
+    console.log("No match. I'm hiding the cards");
+    openedCards[0].target.classList.remove('open');
+    openedCards[1].target.classList.remove('open');
+emptyList();
 }
 
 function emptyList() {
     openedCards = [];
 }
 
-function isPair() {
-    if (openedCards.length === 2) {
-            console.log("You just clicked twice. I'm checking for a match: ");
-        checkMatch();
-    }
-}
-
-function match() {
-        console.log("It's a match! I'm togging the match style");
-    emptyList();
-}
-
-function hide() {
-        console.log("No match. I'm hiding the cards");
-    emptyList();
-}
-
-function checkMatch() {
-    if (openedCards[0] === openedCards[1]) {
-        match();
-    } else {
-        hide();
-    }
-}
+shuffle(icons);
+console.log(icons);
+createList();
