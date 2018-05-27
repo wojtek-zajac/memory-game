@@ -1,4 +1,6 @@
 const deck = document.querySelector(".deck");
+const cards = document.querySelectorAll(".card");
+const cardss = [...cards];
 const iconsUnique = ["fa-anchor",
                      "fa-bicycle",
                      "fa-bolt",
@@ -9,6 +11,7 @@ const iconsUnique = ["fa-anchor",
                      "fa-paper-plane-o"];
 const icons = [...iconsUnique, ...iconsUnique];
 const movesContainer = document.querySelector(".moves");
+const restartButton = document.querySelector(".restart");
 let openedCards = [];
 let moves = 0;
 
@@ -126,13 +129,28 @@ function displayMoves() {
     }
 }
 
+function restart() {
+    emptyList();
+    resetMoves();
+    ///cards.className = "card";
+    resetCards();
+}
+
 function emptyList() {
     openedCards = [];
 }
 
+function resetMoves() {
+    moves = 0;
+    movesContainer.innerHTML = "";
+}
+
+function resetCards() {
+    $("li").removeClass("match freeze open show");
+}
+
+restartButton.addEventListener("click", restart);
 
 shuffle(icons);
 console.log(icons);
 createList();
-
-
