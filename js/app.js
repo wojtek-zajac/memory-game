@@ -84,5 +84,35 @@ function openCard(clicked) {
 function countItems(clicked) {
     let eventClass = clicked.target.firstChild.className;
     openedCards.push(eventClass);
-        console.log("CLICKS COUNT: " + openedCards.length);    
+        console.log("CLICKS COUNT: " + openedCards.length);
+    isPair();    
+}
+
+function emptyList() {
+    openedCards = [];
+}
+
+function isPair() {
+    if (openedCards.length === 2) {
+            console.log("You just clicked twice. I'm checking for a match: ");
+        checkMatch();
+    }
+}
+
+function match() {
+        console.log("It's a match! I'm togging the match style");
+    emptyList();
+}
+
+function hide() {
+        console.log("No match. I'm hiding the cards");
+    emptyList();
+}
+
+function checkMatch() {
+    if (openedCards[0] === openedCards[1]) {
+        match();
+    } else {
+        hide();
+    }
 }
