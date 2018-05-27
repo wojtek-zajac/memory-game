@@ -58,9 +58,9 @@ function respondToTheClick(clicked) {
 }
 
 function openCard(clicked) {
-    clicked.target.className = "card open show froze";
+    clicked.target.className = "card open show freeze";
     countItems(clicked);
-    //clicked.target.classList.toggle("frozen");
+    //clicked.target.classList.toggle("freeze");
 }
 
 function countItems(clicked) {
@@ -79,10 +79,11 @@ function isPair() {
 }
 
 function checkMatch() {
+    deck.classList.toggle("freeze");
     if (openedCards[0].target.firstChild.className === openedCards[1].target.firstChild.className) {
         match();
     } else {
-        hide();
+        waitToHide();
     }
 }
 
@@ -90,14 +91,20 @@ function match() {
     console.log("It's a match! I'm toggling the match style");
     openedCards[0].target.className = "card match freeze";
     openedCards[1].target.className = "card match freeze"
+    deck.classList.toggle("freeze");
 emptyList();
 }
 
+function waitToHide() {
+    console.log("No match. I'm hiding the cards in 1s...");
+    setTimeout(hide, 1000);
+}
+
 function hide() {
-    console.log("No match. I'm hiding the cards");
-    openedCards[0].target.classList.remove('open');
-    openedCards[1].target.classList.remove('open');
-emptyList();
+    openedCards[0].target.className = "card";
+    openedCards[1].target.className = "card";
+    deck.classList.toggle("freeze");
+    emptyList();
 }
 
 function emptyList() {
