@@ -8,11 +8,16 @@ const iconsUnique = ["fa-anchor",
                      "fa-leaf",
                      "fa-paper-plane-o"];
 const icons = [...iconsUnique, ...iconsUnique];
-const movesContainer = document.querySelector(".moves");
+const stopwatchContainer = document.querySelectorAll('.stopwatch')[0];
 const restartButton = document.querySelector(".restart");
+const movesContainer = document.querySelector(".moves");
+const star1 = $(".stars li:nth-child(1) i");
+const star2 = $(".stars li:nth-child(2) i");
+const star3 = $(".stars li:nth-child(3) i");
+const star4 = $(".stars li:nth-child(4) i");
+const star5 = $(".stars li:nth-child(5) i");
 let openCardsList = [];
 let moves = 0;
-const stopwatchContainer = document.querySelectorAll('.stopwatch')[0];
 let time;
 let seconds = 0;
 let minutes = 0;
@@ -32,7 +37,6 @@ function shuffle(array) {
 }
 
 
-//The power of jQuery removes all decs's children
 function resetDeck() {
     $(deck).empty();
 }
@@ -55,8 +59,6 @@ function createNewDeck () {
 
 
 function respondToTheClick(clicked) {
-    let currentClick = clicked.target;
-
     if (clicked.target.nodeName === "LI") {
         console.log("LI was clicked -> event:");
         console.log(clicked);
@@ -74,7 +76,36 @@ function openCard(clicked) {
 
 function countMove() {
     moves++;
+    checkStars();
     displayMoves();
+}
+
+
+function checkStars() {
+    switch(moves) {
+        case 10:
+            emptyStar(star1);
+            break;
+        case 20:
+            emptyStar(star2);
+            break;
+        case 30:
+            emptyStar(star3);
+            break;
+        case 40:
+            emptyStar(star4);
+            break;
+        case 61:
+            emptyStar(star5);
+        default:
+            break;
+    }
+}
+
+
+function emptyStar(star) {
+    star.removeClass("fa fa-star");
+    star.addClass("fa fa-star-o");
 }
 
 
@@ -164,11 +195,21 @@ function emptyOpenCardsList() {
 function restart() {
     createNewDeck();
     emptyOpenCardsList();
+    resetStars();
     resetMoves();
     resetStopwatch();
     resetCards();
     stopStopwatch();
     $(".deck").one( "click", () => {stopwatch();});
+}
+
+
+function resetStars() {
+    star1[0].className = "fa fa-star";
+    star2[0].className = "fa fa-star";
+    star3[0].className = "fa fa-star";
+    star4[0].className = "fa fa-star";
+    star5[0].className = "fa fa-star";
 }
 
 
@@ -221,5 +262,5 @@ $(".deck").one( "click", () => {
 restartButton.addEventListener("click", restart);
 
 
-//Call function
+//Init function
 createNewDeck();
