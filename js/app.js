@@ -54,14 +54,40 @@ function respondToTheClick(clicked) {
     if (clicked.target.nodeName === "LI") {
         console.log("LI was clicked -> event:");
         console.log(clicked);
-        openCard(clicked);       
+        openCard(clicked);
+        countItems(clicked);      
     }
 }
 
 
 function openCard(clicked) {
     clicked.target.className = "card open show freeze";
-    countItems(clicked);
+    countMove();
+}
+
+
+function countMove() {
+    moves++;
+    displayMoves();
+}
+
+
+function displayMoves() {
+    if (moves === 1) {
+        firstMoveSyntax();
+    } else {
+        pluralMovesSyntax();
+    }
+}
+
+
+function firstMoveSyntax() {
+    movesContainer.innerHTML = `${moves} Move`;
+}
+
+
+function pluralMovesSyntax() {
+    movesContainer.innerHTML = `${moves} Moves`;
 }
 
 
@@ -92,13 +118,16 @@ function checkMatch() {
 
 
 function match() {
+    toggleMatchStyle();
+    emptyList();
+}
+
+function toggleMatchStyle() {
     console.log("It's a match! I'm toggling the match style");
     openedCards[0].target.className = "card match freeze";
     openedCards[1].target.className = "card match freeze"
     deck.classList.toggle("freeze");
-    countMove();
 }
-
 
 function waitToHide() {
     console.log("No match. I'm hiding the cards in 1s...");
@@ -108,7 +137,7 @@ function waitToHide() {
 
 function hide() {
     resetCurrentCards();
-    countMove();
+    emptyList();
 }
 
 function resetCurrentCards() {
@@ -118,29 +147,8 @@ function resetCurrentCards() {
 }
 
 
-function countMove() {
-    moves++;
-    displayMoves();
-    emptyList();
-}
-
-
-function displayMoves() {
-    if (moves === 1) {
-        firstMoveSyntax();
-    } else {
-        pluralMovesSyntax()
-    }
-}
-
-
-function firstMoveSyntax() {
-    movesContainer.innerHTML = `${moves} Move`;
-}
-
-
-function pluralMovesSyntax() {
-    movesContainer.innerHTML = `${moves} Moves`;
+function emptyList() {
+    openedCards = [];
 }
 
 
@@ -151,20 +159,13 @@ function restart() {
     resetCards();
     stopStopwatch();
 
-    $(".deck").one( "click", () => {
-        stopwatch();
-    });
-}
-
-
-function emptyList() {
-    openedCards = [];
+    $(".deck").one( "click", () => {stopwatch();});
 }
 
 
 function resetMoves() {
     moves = 0;
-    movesContainer.innerHTML = "";
+    movesContainer.innerHTML = "0 Moves";
 }
 
 
