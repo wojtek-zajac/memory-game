@@ -10,17 +10,17 @@ const iconsUnique = ["fa-anchor",
 const icons = [...iconsUnique, ...iconsUnique];
 const movesContainer = document.querySelector(".moves");
 const restartButton = document.querySelector(".restart");
-let openedCards = [];
+let openCardsList = [];
 let moves = 0;
 const stopwatchContainer = document.querySelectorAll('.stopwatch')[0];
 let time;
 let seconds = 0;
 let minutes = 0;
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+
+// // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
-
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -28,14 +28,20 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
 
-//Create list of cards based on array and append to DOM
-function createList () {
+//The power of jQuery removes all decs's children
+function resetDeck() {
+    $(deck).empty();
+}
 
+//Create list of cards based on array and append to DOM
+function createNewDeck () {
+    resetDeck();
+    shuffle(icons);
+    console.log(icons);
     for (icon of icons) {
         let item = document.createElement("li");
         let text = document.createElement("i");
@@ -92,15 +98,15 @@ function pluralMovesSyntax() {
 
 
 function countItems(clicked) {
-    openedCards.push(clicked);
-            console.log("CLICKS COUNT: " + openedCards.length + "\nOPENED CARDS: ");
-            console.log(openedCards);
+    openCardsList.push(clicked);
+            console.log("CLICKS COUNT: " + openCardsList.length + "\nOPENED CARDS: ");
+            console.log(openCardsList);
     isPair();    
 }
 
 
 function isPair() {
-    if (openedCards.length === 2) {
+    if (openCardsList.length === 2) {
             console.log("You just clicked twice. I'm checking for a match: ");
         checkMatch();
     }
@@ -109,7 +115,7 @@ function isPair() {
 
 function checkMatch() {
     deck.classList.toggle("freeze");
-    if (openedCards[0].target.firstChild.className === openedCards[1].target.firstChild.className) {
+    if (openCardsList[0].target.firstChild.className === openCardsList[1].target.firstChild.className) {
         match();
     } else {
         waitToHide();
@@ -119,15 +125,17 @@ function checkMatch() {
 
 function match() {
     toggleMatchStyle();
-    emptyList();
+    emptyOpenCardsList();
 }
+
 
 function toggleMatchStyle() {
     console.log("It's a match! I'm toggling the match style");
-    openedCards[0].target.className = "card match freeze";
-    openedCards[1].target.className = "card match freeze"
+    openCardsList[0].target.className = "card match freeze";
+    openCardsList[1].target.className = "card match freeze";
     deck.classList.toggle("freeze");
 }
+
 
 function waitToHide() {
     console.log("No match. I'm hiding the cards in 1s...");
@@ -137,28 +145,29 @@ function waitToHide() {
 
 function hide() {
     resetCurrentCards();
-    emptyList();
+    emptyOpenCardsList();
 }
 
+
 function resetCurrentCards() {
-    openedCards[0].target.className = "card";
-    openedCards[1].target.className = "card";
+    openCardsList[0].target.className = "card";
+    openCardsList[1].target.className = "card";
     deck.classList.toggle("freeze");
 }
 
 
-function emptyList() {
-    openedCards = [];
+function emptyOpenCardsList() {
+    openCardsList = [];
 }
 
 
 function restart() {
-    emptyList();
+    createNewDeck();
+    emptyOpenCardsList();
     resetMoves();
     resetStopwatch();
     resetCards();
     stopStopwatch();
-
     $(".deck").one( "click", () => {stopwatch();});
 }
 
@@ -213,6 +222,4 @@ restartButton.addEventListener("click", restart);
 
 
 //Call function
-shuffle(icons);
-console.log(icons);
-createList();
+createNewDeck();
