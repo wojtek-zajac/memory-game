@@ -8,7 +8,7 @@ const iconsUnique = ["fa-anchor",
                      "fa-leaf",
                      "fa-paper-plane-o"];
 const icons = [...iconsUnique, ...iconsUnique];
-const stopwatchContainer = document.querySelectorAll('.stopwatch')[0];
+const timerContainer = document.querySelectorAll('.timer')[0];
 const restartButton = document.querySelector(".restart");
 const movesContainer = document.querySelector(".moves");
 const star1 = $(".stars li:nth-child(1) i");
@@ -23,7 +23,30 @@ let seconds = 0;
 let minutes = 0;
 
 
-// // Shuffle function from http://stackoverflow.com/a/2450976
+// Create a new list of cards based on array and append it to DOM with event listeners
+function createNewDeck() {
+    resetDeck();
+    shuffle(icons);
+    timerListenerOn();
+    console.log(icons);
+    for (icon of icons) {
+        let item = document.createElement("li");
+        let text = document.createElement("i");
+        item.classList.add("card");
+        text.classList.add("fa", icon);
+        item.appendChild(text);
+        deck.appendChild(item);
+    }
+    listenToDeckClicks();
+}
+
+
+function resetDeck() {
+    $(deck).empty();
+}
+
+
+// Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
     while (currentIndex !== 0) {
@@ -37,23 +60,7 @@ function shuffle(array) {
 }
 
 
-function resetDeck() {
-    $(deck).empty();
-}
-
-//Create list of cards based on array and append to DOM
-function createNewDeck () {
-    resetDeck();
-    shuffle(icons);
-    console.log(icons);
-    for (icon of icons) {
-        let item = document.createElement("li");
-        let text = document.createElement("i");
-        item.classList.add("card");
-        text.classList.add("fa", icon);
-        item.appendChild(text);
-        deck.appendChild(item);
-    }
+function listenToDeckClicks() {
     deck.addEventListener("click", respondToTheClick);
 }
 
@@ -63,7 +70,7 @@ function respondToTheClick(clicked) {
         console.log("LI was clicked -> event:");
         console.log(clicked);
         openCard(clicked);
-        countItems(clicked);      
+        countCards(clicked);      
     }
 }
 
@@ -96,7 +103,7 @@ function checkStars() {
             emptyStar(star4);
             break;
         case 61:
-            emptyStar(star5);
+            stopTimer();
         default:
             break;
     }
@@ -128,7 +135,7 @@ function pluralMovesSyntax() {
 }
 
 
-function countItems(clicked) {
+function countCards(clicked) {
     openCardsList.push(clicked);
             console.log("CLICKS COUNT: " + openCardsList.length + "\nOPENED CARDS: ");
             console.log(openCardsList);
@@ -192,18 +199,6 @@ function emptyOpenCardsList() {
 }
 
 
-function restart() {
-    createNewDeck();
-    emptyOpenCardsList();
-    resetStars();
-    resetMoves();
-    resetStopwatch();
-    resetCards();
-    stopStopwatch();
-    $(".deck").one( "click", () => {stopwatch();});
-}
-
-
 function resetStars() {
     star1[0].className = "fa fa-star";
     star2[0].className = "fa fa-star";
@@ -219,20 +214,20 @@ function resetMoves() {
 }
 
 
-function resetStopwatch() {
-    stopwatchContainer.textContent = "00:00";
+function resetTimer() {
+    timerContainer.textContent = "00:00";
     seconds = 0; 
     minutes = 0;
 }
 
 
-function stopStopwatch() {
-    clearTimeout(time);
+function resetCards() {
+    $("li").removeClass("match freeze open show");
 }
 
 
-function resetCards() {
-    $("li").removeClass("match freeze open show");
+function stopTimer() {
+    clearTimeout(time);
 }
 
 
@@ -242,25 +237,42 @@ function countSeconds() {
         seconds = 0;
         minutes++;
     }   
-    stopwatchContainer.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + 
+    timerContainer.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + 
                                      (seconds > 9 ? seconds : "0" + seconds);
-    stopwatch();
+    timer();
 }
 
 
-function stopwatch() {
+function timer() {
+    timerListenerOff();
     time = setTimeout(countSeconds, 1000);
 }
 
 
-//Event listeners
-$(".deck").one( "click", () => {
-    stopwatch();
-});
+function timerListenerOn() {
+    deck.addEventListener("click", timer);
+}
+
+
+function timerListenerOff() {   
+    deck.removeEventListener("click", timer);
+}
 
 
 restartButton.addEventListener("click", restart);
 
 
-//Init function
+function restart() {
+    createNewDeck();
+    emptyOpenCardsList();
+    resetStars();
+    resetMoves();
+    resetTimer();
+    stopTimer();
+    resetCards();
+    timerListenerOn();
+}
+
+
+// Init function
 createNewDeck();
