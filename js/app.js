@@ -154,10 +154,11 @@ function isPair() {
 
 
 function checkMatch() {
-    deck.classList.toggle("freeze");
-    if (openCardsList[0].target.firstChild.className === openCardsList[1].target.firstChild.className) {
+    let icon1class = openCardsList[0].target.firstChild.className;
+    let icon2class = openCardsList[1].target.firstChild.className;
+    freezeDeck();
+    if (icon1class === icon2class) {
         countMatch();
-        //match();
     } else {
         waitToHide();
     }
@@ -174,8 +175,14 @@ function toggleMatchStyle() {
     console.log("It's a match! I'm toggling the match style");
     openCardsList[0].target.className = "card match freeze";
     openCardsList[1].target.className = "card match freeze";
+    freezeDeck();
+}
+
+
+function freezeDeck() {
     deck.classList.toggle("freeze");
 }
+
 
 function countMatch() {
     matchedPairs++;
@@ -206,7 +213,7 @@ function hide() {
 function resetCurrentCards() {
     openCardsList[0].target.className = "card";
     openCardsList[1].target.className = "card";
-    deck.classList.toggle("freeze");
+    freezeDeck();
 }
 
 
@@ -239,6 +246,10 @@ function resetTimer() {
 
 function resetCards() {
     $("li").removeClass("match freeze open show");
+}
+
+function resetMatchedPairs() {
+    matchedPairs = 0;
 }
 
 
@@ -281,6 +292,7 @@ restartButton.addEventListener("click", restart);
 function restart() {
     createNewDeck();
     emptyOpenCardsList();
+    resetMatchedPairs();
     resetStars();
     resetMoves();
     resetTimer();
