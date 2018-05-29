@@ -18,6 +18,7 @@ const star4 = $(".stars li:nth-child(4) i");
 const star5 = $(".stars li:nth-child(5) i");
 let openCardsList = [];
 let moves = 0;
+let matchedPairs = 0;
 let time;
 let seconds = 0;
 let minutes = 0;
@@ -155,7 +156,8 @@ function isPair() {
 function checkMatch() {
     deck.classList.toggle("freeze");
     if (openCardsList[0].target.firstChild.className === openCardsList[1].target.firstChild.className) {
-        match();
+        countMatch();
+        //match();
     } else {
         waitToHide();
     }
@@ -173,6 +175,19 @@ function toggleMatchStyle() {
     openCardsList[0].target.className = "card match freeze";
     openCardsList[1].target.className = "card match freeze";
     deck.classList.toggle("freeze");
+}
+
+function countMatch() {
+    matchedPairs++;
+    console.log("MATCHED PAIRS: " + matchedPairs);
+    if (matchedPairs < 8) {
+        match();
+    } else {
+        toggleMatchStyle();
+        stopTimer();
+        //youWon();
+        console.log("Y O U   W O N !");
+    }
 }
 
 
