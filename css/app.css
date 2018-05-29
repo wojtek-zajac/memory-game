@@ -113,15 +113,17 @@ h1 {
 
 .moves {
     width: 90px;
-    text-align: center;
+    text-align: right;
+    padding-right: 10px;
 }
 
 .score-panel .stopwatch {
     display: inline-block;
-    text-align: center;
+    text-align: left;
     flex-grow: 2;
     align-self: center;
     margin: 0;
+    padding-left: 13px;
 }
 
 .score-panel .restart {
