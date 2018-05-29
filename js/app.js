@@ -30,12 +30,12 @@ function createNewDeck() {
     timerListenerOn();
     console.log(icons);
     for (icon of icons) {
-        let item = document.createElement("li");
-        let text = document.createElement("i");
-        item.classList.add("card");
-        text.classList.add("fa", icon);
-        item.appendChild(text);
-        deck.appendChild(item);
+        let newCard = document.createElement("li");
+        let newContent = document.createElement("i");
+        newCard.classList.add("card");
+        newContent.classList.add("fa", icon);
+        newCard.appendChild(newContent);
+        deck.appendChild(newCard);
     }
     listenToDeckClicks();
 }
@@ -90,20 +90,21 @@ function countMove() {
 
 function checkStars() {
     switch(moves) {
-        case 10:
+        case 21:
             emptyStar(star1);
             break;
-        case 20:
+        case 29:
             emptyStar(star2);
             break;
-        case 30:
+        case 35:
             emptyStar(star3);
             break;
-        case 40:
+        case 41:
             emptyStar(star4);
             break;
         case 61:
             stopTimer();
+            //gameOver();
         default:
             break;
     }
