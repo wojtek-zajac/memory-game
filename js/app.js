@@ -1,21 +1,14 @@
 const deck = document.querySelector(".deck");
-const iconsUnique = ["fa-anchor",
-                     "fa-bicycle",
-                     "fa-bolt",
-                     "fa-bomb",
-                     "fa-cube",
-                     "fa-diamond",
-                     "fa-leaf",
-                     "fa-paper-plane-o"];
+const iconsUnique = ["fa-anchor", "fa-bicycle", "fa-bolt", "fa-bomb", "fa-cube", "fa-diamond", "fa-leaf", "fa-paper-plane-o"];
 const icons = [...iconsUnique, ...iconsUnique];
-const timerContainer = document.querySelectorAll('.timer')[0];
-const restartButton = document.querySelector(".restart");
-const movesContainer = document.querySelector(".moves");
 const star1 = $(".stars li:nth-child(1) i");
 const star2 = $(".stars li:nth-child(2) i");
 const star3 = $(".stars li:nth-child(3) i");
 const star4 = $(".stars li:nth-child(4) i");
 const star5 = $(".stars li:nth-child(5) i");
+const movesContainer = document.querySelector(".moves");
+const timerContainer = document.querySelectorAll('.timer')[0];
+const restartButton = document.querySelector(".restart");
 let openCardsList = [];
 let moves = 0;
 let matchedPairs = 0;
@@ -31,8 +24,8 @@ function createNewDeck() {
     timerListenerOn();
     console.log(icons);
     for (icon of icons) {
-        let newCard = document.createElement("li");
-        let newContent = document.createElement("i");
+        const newCard = document.createElement("li");
+        const newContent = document.createElement("i");
         newCard.classList.add("card");
         newContent.classList.add("fa", icon);
         newCard.appendChild(newContent);
@@ -265,7 +258,7 @@ function countSeconds() {
         minutes++;
     }   
     timerContainer.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + 
-                                     (seconds > 9 ? seconds : "0" + seconds);
+                                 (seconds > 9 ? seconds : "0" + seconds);
     timer();
 }
 
@@ -286,9 +279,6 @@ function timerListenerOff() {
 }
 
 
-restartButton.addEventListener("click", restart);
-
-
 function restart() {
     createNewDeck();
     emptyOpenCardsList();
@@ -301,6 +291,39 @@ function restart() {
     timerListenerOn();
 }
 
+
+restartButton.addEventListener("click", restart);
+
+
+// Event Listeners and functions for modal
+const modal = document.querySelector(".modal");
+const modalButton = document.querySelector(".modalButton");
+const closeButton = document.querySelector(".closeButton");
+const playAgainButton = document.querySelector(".playAgainButton");
+
+modalButton.addEventListener("click", openModal);
+closeButton.addEventListener("click", closeModal);
+playAgainButton.addEventListener("click", restartFromModal);
+window.addEventListener("click", outside);
+
+function openModal(){
+  modal.style.display = "block";
+}
+
+function closeModal(){
+  modal.style.display = "none";
+}
+
+function restartFromModal() {
+    closeModal();
+    restart();
+}
+
+function outside(click){
+  if(click.target === modal){
+    modal.style.display = "none";
+  }
+}
 
 // Init function
 createNewDeck();
