@@ -38,11 +38,8 @@ h1 {
  */
 
 .deck {
-
     position: absolute;
-    /* margin: 0 auto; */
     top: 100px;
-
     width: 660px;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
@@ -53,7 +50,6 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    /* margin: 0 0 3em; */
 }
 
 .deck .card {
@@ -94,10 +90,6 @@ h1 {
  * Styles for the Score Panel
  */
 
-/* .panel {
-    border: 1px solid blue;
-} */
-
 .score-panel {
     display: flex;
     flex-flow: row wrap;
@@ -108,7 +100,7 @@ h1 {
     align-items: center;
 }
 
-.score-panel .stars {
+.score-panel .stars, .starsModal {
     margin: 0;
     padding: 0;
     display: inline-block;
@@ -116,9 +108,14 @@ h1 {
     color: gold;
 }
 
-.score-panel .stars li {
+.score-panel .stars li, .starsModal li {
     list-style: none;
     display: inline-block;
+}
+
+.starsModal {
+    font-size: 2rem;
+    margin: auto;
 }
 
 .moves {
@@ -161,54 +158,59 @@ h1 {
   
 .modalContent {
     background-color: #f4f4f4;
-    /* margin: 137px auto; */
     position: relative;
     margin: 0 auto;
     top: 116px;
-    
     width: 660px;
     min-height: 680px;
     border-radius: 10px;
-    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+    box-shadow: 0 5px 8px 0 #00000033,0 7px 20px 0 #0000002b;
     animation-name: openModal;
     animation-duration: 2s;
 }
   
-.modalHeader h2 {
+.modalHeader h1 {
     margin: 0;
+    font-weight: normal;
+    font-size: 1.5rem;
 }
   
 .modalHeader {
-    /* background: #66d35c; */
     background: #2e3d49;
-    padding: 15px;
+    box-sizing: border-box;
+    padding: 9px;
     color: #fff;
     text-align: center;
-    font-size: 1.44rem;
+    font-size: 1rem;
+    margin: 0;
     border-radius: 10px 10px 0 0;
-    box-shadow: 5px 2px 200px 0 rgba(46, 61, 73, 0.4);
+    box-shadow: 5px 2px 200px 0 #2e3d4966;
 }
   
 .modalBody {
     height: 100%;
+    width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-flow: column nowrap;
-    padding: 10px 20px;
-    /* background-color: #ffffffcf; */
+    padding: 20px 20px;
+    margin: 0;
 }
   
 .closeButton {
     float: right;
-    margin-right: 10px;
     color: #ccc;
     font-size: 32px;
     color: #fff;
+    line-height: 0;
+    padding-top: 10px;
+    padding: 16px 7px 0 0;
+    box-sizing: border-box;
+
 }
   
 .closeButton:hover, .closeButton:focus {
     cursor: pointer;
-    /* color: #000; */
     color: rgba(23, 13, 13, 0.81);
     text-decoration: none;
 }
@@ -216,17 +218,25 @@ h1 {
 .congratulations {
     text-align: center;
     font-size: 1.85rem;
-    margin: 60px 20px 35px;
+    margin: 20px;
 }
 
 .congratText {
-    padding-left: 20%;
-    padding-bottom: 30px;
+    display: inline-block;
+    margin: auto;
+    padding: 20px 0 10px;
+    font-size: 1.2rem;
 }
 
 .congratStars {
     display: block;
     margin: auto;
+}
+
+.rating {
+    display: inline-block;
+    margin: auto;
+    font-size: 1rem;
 }
 
 .playAgainButton {
@@ -235,15 +245,13 @@ h1 {
     padding: 11px 16px;
     border-radius: 7px;
     color: #fff;
-    background: #47b63d;
-    font-size: 1rem;
+    background: #4cbd42;
+    font-size: 1.2rem;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5); 
-    /* align-self: flex-end; */ 
 }
 
 .playAgainButton:hover, .playAgainButton:focus {
     cursor: pointer;
-    /* background-color: #66d35c; */
     background-color: #2e3d49;
     text-decoration: none;
 }
@@ -272,8 +280,8 @@ h1 {
 }
   
 .checkmark {
-    width: 110px;
-    height: 110px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     display: block;
     stroke-width: 4;

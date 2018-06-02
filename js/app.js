@@ -9,12 +9,16 @@ const star5 = $(".stars li:nth-child(5) i");
 const movesContainer = document.querySelector(".moves");
 const timerContainer = document.querySelectorAll('.timer')[0];
 const restartButton = document.querySelector(".restart");
+const modal = document.querySelector(".modal");
+const closeButton = document.querySelector(".closeButton");
+const playAgainButton = document.querySelector(".playAgainButton");
 let openCardsList = [];
 let moves = 0;
 let matchedPairs = 0;
 let time;
 let seconds = 0;
 let minutes = 0;
+const modalButton = document.querySelector(".modalButton"); //TEMP
 
 
 // Create a new list of cards based on array and append it to DOM with event listeners
@@ -84,21 +88,18 @@ function countMove() {
 
 function checkStars() {
     switch(moves) {
-        case 21:
-            emptyStar(star1);
+        case 23:
+            emptyStar(star5);
             break;
         case 29:
-            emptyStar(star2);
-            break;
-        case 35:
-            emptyStar(star3);
-            break;
-        case 41:
             emptyStar(star4);
             break;
-        case 61:
-            stopTimer();
-            //gameOver();
+        case 37:
+            emptyStar(star3);
+            break;
+        case 47:
+            emptyStar(star2);
+            break;
         default:
             break;
     }
@@ -186,6 +187,7 @@ function countMatch() {
         toggleMatchStyle();
         stopTimer();
         //youWon();
+        openModal();
         console.log("Y O U   W O N !");
     }
 }
@@ -279,6 +281,42 @@ function timerListenerOff() {
 }
 
 
+function openModal() {
+    modal.style.display = "block";
+    attachResults();
+}
+  
+  
+function attachResults() {
+      let stars = document.querySelector(".stars").innerHTML;
+      let starsModal = document.querySelector(".starsModal");
+      let timeHTML = timerContainer.innerHTML;
+      let results = `You moved ${moves} times and your time was ${timeHTML}`;
+      let resultsModal = document.querySelector(".results");
+      
+      starsModal.innerHTML = stars;
+      resultsModal.innerHTML = results;
+}
+  
+  
+function restartFromModal() {
+    closeModal();
+    restart();
+}
+
+
+function closeModal(){
+    modal.style.display = "none";
+}
+  
+
+function outside(click) {
+    if(click.target === modal) {
+      modal.style.display = "none";
+    }
+}
+
+
 function restart() {
     createNewDeck();
     emptyOpenCardsList();
@@ -294,36 +332,14 @@ function restart() {
 
 restartButton.addEventListener("click", restart);
 
+modalButton.addEventListener("click", openModal); //TEMP
 
-// Event Listeners and functions for modal
-const modal = document.querySelector(".modal");
-const modalButton = document.querySelector(".modalButton");
-const closeButton = document.querySelector(".closeButton");
-const playAgainButton = document.querySelector(".playAgainButton");
-
-modalButton.addEventListener("click", openModal);
 closeButton.addEventListener("click", closeModal);
+
 playAgainButton.addEventListener("click", restartFromModal);
+
 window.addEventListener("click", outside);
 
-function openModal(){
-  modal.style.display = "block";
-}
-
-function closeModal(){
-  modal.style.display = "none";
-}
-
-function restartFromModal() {
-    closeModal();
-    restart();
-}
-
-function outside(click){
-  if(click.target === modal){
-    modal.style.display = "none";
-  }
-}
 
 // Init function
 createNewDeck();
