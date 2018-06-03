@@ -109,8 +109,8 @@ function checkStars() {
 
 
 function emptyStar(star) {
-    star.removeClass("fa fa-star");
-    star.addClass("fa fa-star-o");
+    star.removeClass("fas fa-star");
+    star.addClass("far fa-star");
 }
 
 
@@ -243,11 +243,11 @@ function emptyOpenCardsList() {
 
 
 function resetStars() {
-    star1[0].className = "fa fa-star";
-    star2[0].className = "fa fa-star";
-    star3[0].className = "fa fa-star";
-    star4[0].className = "fa fa-star";
-    star5[0].className = "fa fa-star";
+    star1[0].className = "fas fa-star";
+    star2[0].className = "fas fa-star";
+    star3[0].className = "fas fa-star";
+    star4[0].className = "fas fa-star";
+    star5[0].className = "fas fa-star";
 }
 
 
