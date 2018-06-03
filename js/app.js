@@ -154,22 +154,8 @@ function checkMatch() {
     if (icon1class === icon2class) {
         countMatch();
     } else {
-        waitToHide();
+        shakeCards();
     }
-}
-
-
-function match() {
-    toggleMatchStyle();
-    emptyOpenCardsList();
-}
-
-
-function toggleMatchStyle() {
-    console.log("It's a match! I'm toggling the match style");
-    openCardsList[0].target.className = "card match freeze";
-    openCardsList[1].target.className = "card match freeze";
-    freezeDeck();
 }
 
 
@@ -193,9 +179,42 @@ function countMatch() {
 }
 
 
+function match() {
+    toggleMatchStyle();
+    emptyOpenCardsList();
+}
+
+
+function toggleMatchStyle() {
+    console.log("It's a match! I'm toggling the match style");
+    openCardsList[0].target.className = "card match freeze";
+    openCardsList[1].target.className = "card match freeze";
+    freezeDeck();
+}
+
+
+function shakeCards() {
+    setTimeout( () => {
+        openCardsList[0].target.classList.toggle("shake");
+        openCardsList[1].target.classList.toggle("shake");
+    }, 800);
+
+    shakeOff();
+    waitToHide();
+}
+
+
+function shakeOff() {
+    setTimeout( () => {
+        openCardsList[0].target.classList.toggle("shake");
+        openCardsList[1].target.classList.toggle("shake");
+    }, 200);
+}
+
+
 function waitToHide() {
     console.log("No match. I'm hiding the cards in 1s...");
-    setTimeout(hide, 600);
+    setTimeout(hide, 900);
 }
 
 
@@ -282,8 +301,11 @@ function timerListenerOff() {
 
 
 function openModal() {
-    modal.style.display = "block";
     attachResults();
+
+    setTimeout( () => {
+        modal.style.display = "block";
+    }, 700);
 }
   
   

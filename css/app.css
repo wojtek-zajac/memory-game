@@ -99,26 +99,61 @@ h1 {
     0% {
         transform: scale3d(1, 1, 1);
     }
+
     30% {
         transform: scale3d(1.25, 0.75, 1);
     }
+
     40% {
         transform: scale3d(0.75, 1.25, 1);
     }
+
     50% {
         transform: scale3d(1.15, 0.85, 1);
     }
+
     65% {
         transform: scale3d(0.95, 1.05, 1);
     }
+
     75% {
         transform: scale3d(1.05, 0.95, 1);
     }
+
     100% {
         transform: scale3d(1, 1, 1);
     }
   }
   
+
+.shake {
+    animation: shake-cards 0.75s cubic-bezier(.35,.07,.2,.97) both;
+}
+
+
+@keyframes shake-cards {
+    10%,
+    90% {
+        transform: translateX(-1px);
+    }
+    
+    20%,
+    80% {
+        transform: translateX(2px);
+    }
+  
+    30%,
+    50%,
+    70% {
+        transform: translateX(-4px);
+    }
+  
+    40%,
+    60% {
+        transform: translateX(4px);
+    }
+}
+
 
 .freeze {
     pointer-events: none;
