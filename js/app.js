@@ -262,9 +262,20 @@ function resetTimer() {
 }
 
 
-function resetCards() {
-    $("li").removeClass("match freeze open show");
+function resetCards() {    
+    let cards = document.querySelectorAll(".card");
+
+    for (card of cards) {
+        card.classList.add("flipAllCards");
+    }
+
+    setTimeout( () => {
+        for (card of cards) {
+            card.classList.remove("flipAllCards");
+        }
+    }, 710);
 }
+
 
 function resetMatchedPairs() {
     matchedPairs = 0;
