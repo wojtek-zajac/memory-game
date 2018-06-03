@@ -198,7 +198,7 @@ h1 {
 }
 
 .stars {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .starsModal {
@@ -227,20 +227,22 @@ h1 {
     float: right;
     cursor: pointer;
     width: 30px;
-    text-align: center;
+    text-align: right;
+    color: black;
 }
 
-.fa-repeat {
-    font-size: 1.2rem;
+.fa-redo-alt {
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
-.fa-repeat:hover {
+.fa-redo-alt:hover {
     color: green;
 }
 
 
-.fa-repeat:active {
-    color: red;
+.fa-redo-alt:active {
+    color: rgb(0, 183, 255);
     animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 @keyframes rotate-in-center {
@@ -306,6 +308,8 @@ h1 {
 }
   
 .modalBody {
+    display: flex;
+    flex-flow: row nowrap;
     height: 100%;
     width: 100%;
     box-sizing: border-box;
@@ -406,7 +410,7 @@ h1 {
     stroke-linejoin: round;
     stroke: #ffffffe2;
     stroke-miterlimit: 10;
-    margin: 10% auto;
+    margin: 50px auto;
     box-shadow: inset 0px 0px 0px #66d35c;
     animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
 }

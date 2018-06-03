@@ -1,5 +1,7 @@
 const deck = document.querySelector(".deck");
-const iconsUnique = ["fa-anchor", "fa-bicycle", "fa-bolt", "fa-bomb", "fa-cube", "fa-diamond", "fa-leaf", "fa-paper-plane-o"];
+// const iconsUnique = ["fa-anchor", "fa-bicycle", "fa-bolt", "fa-bomb", "fa-cube", "fa-diamond", "fa-leaf", "fa-paper-plane-o"];
+const iconsUnique = ["fa-couch", "fa-crow", "fa-fighter-jet", "fa-poo", "fa-shoe-prints", "fa-skull", "fa-thumbs-up", "fa-wrench"];
+
 const icons = [...iconsUnique, ...iconsUnique];
 const star1 = $(".stars li:nth-child(1) i");
 const star2 = $(".stars li:nth-child(2) i");
@@ -31,7 +33,7 @@ function createNewDeck() {
         const newCard = document.createElement("li");
         const newContent = document.createElement("i");
         newCard.classList.add("card");
-        newContent.classList.add("fa", icon);
+        newContent.classList.add("fas", icon);
         newCard.appendChild(newContent);
         deck.appendChild(newCard);
     }
