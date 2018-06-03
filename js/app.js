@@ -197,6 +197,8 @@ function shakeCards() {
     setTimeout( () => {
         openCardsList[0].target.classList.toggle("shake");
         openCardsList[1].target.classList.toggle("shake");
+        openCardsList[0].target.classList.toggle("noMatch");
+        openCardsList[1].target.classList.toggle("noMatch");
     }, 800);
 
     shakeOff();
@@ -208,6 +210,8 @@ function shakeOff() {
     setTimeout( () => {
         openCardsList[0].target.classList.toggle("shake");
         openCardsList[1].target.classList.toggle("shake");
+        openCardsList[0].target.classList.toggle("noMatch");
+        openCardsList[1].target.classList.toggle("noMatch");
     }, 200);
 }
 
@@ -305,7 +309,7 @@ function openModal() {
 
     setTimeout( () => {
         modal.style.display = "block";
-    }, 700);
+    }, 600);
 }
   
   
