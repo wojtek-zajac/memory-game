@@ -111,7 +111,7 @@ h1 {
         transition: background 900ms;
     }
     40% {
-        transform: scale3d(0.75, 1.25, 1);   
+        transform: scale3d(0.75, 1.15, 1);   
     }
     50% {
         transform: scale3d(1.15, 0.85, 1); 
@@ -464,3 +464,6 @@ h1 {
 	transform: perspective(400px) rotateX(0deg);
   }
 }
+
+/* Media queries */
+

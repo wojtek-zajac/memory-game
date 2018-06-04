@@ -1,6 +1,6 @@
 const deck = document.querySelector(".deck");
 // const iconsUnique = ["fa-anchor", "fa-bicycle", "fa-bolt", "fa-bomb", "fa-cube", "fa-diamond", "fa-leaf", "fa-paper-plane-o"];
-const iconsUnique = ["fa-couch", "fa-crow", "fa-fighter-jet", "fa-poo", "fa-shoe-prints", "fa-skull", "fa-thumbs-up", "fa-wrench"];
+const iconsUnique = ["fa-gem", "fa-crow", "fa-fighter-jet", "fa-binoculars", "fa-shoe-prints", "fa-skull", "fa-hand-paper", "fa-wrench"];
 
 const icons = [...iconsUnique, ...iconsUnique];
 const star1 = $(".stars li:nth-child(1) i");
