@@ -73,14 +73,14 @@ h1 {
 }
 
 .deck .card.show {
-    font-size: 33px;
+    font-size: 34px;
     font-weight: normal;
 }
 
 .deck .card.match {
     transform: rotateY(0);
     cursor: default;
-    font-size: 33px;
+    font-size: 36px;
     border: 1px solid #35180f;
     transition: border 700ms;
     animation: jello-horizontal 0.9s both;
@@ -605,11 +605,11 @@ h1 {
     }
 
     .deck .card.show {
-        font-size: 20px;
+        font-size: 22px;
     }
     
     .deck .card.match {
-        font-size: 22px;
+        font-size: 24px;
     }
 
     .modalBody {
@@ -717,11 +717,11 @@ h1 {
     }
 
     .deck .card.show {
-        font-size: 20px;
+        font-size: 24px;
     }
     
     .deck .card.match {
-        font-size: 22px;
+        font-size: 26px;
     }
 
     .modalBody {
@@ -829,11 +829,11 @@ h1 {
     }
 
     .deck .card.show {
-        font-size: 20px;
+        font-size: 26px;
     }
     
     .deck .card.match {
-        font-size: 22px;
+        font-size: 28px;
     }
 
     .modalBody {
@@ -941,11 +941,11 @@ h1 {
     }
 
     .deck .card.show {
-        font-size: 20px;
+        font-size: 30px;
     }
     
     .deck .card.match {
-        font-size: 22px;
+        font-size: 32px;
     }
 
     .modalBody {
