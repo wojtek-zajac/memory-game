@@ -10,7 +10,7 @@ const star4 = $(".stars li:nth-child(4) i");
 const star5 = $(".stars li:nth-child(5) i");
 const movesContainer = document.querySelector(".moves");
 const timerContainer = document.querySelectorAll('.timer')[0];
-const restartButton = document.querySelector(".restart");
+const restartButton = document.querySelector(".fa-redo-alt");
 const modal = document.querySelector(".modal");
 const closeButton = document.querySelector(".closeButton");
 const playAgainButton = document.querySelector(".playAgainButton");
@@ -312,19 +312,36 @@ function timerListenerOn() {
 }
 
 
-function timerListenerOff() {   
+function timerListenerOff() {
     deck.removeEventListener("click", timer);
+}
+
+
+function rotateRestartIcon() {
+    restartButton.className = "fas fa-redo-alt rotate-scale";
+    
+    setTimeout(stopRotate, 410);
+
+    restart();
+}
+
+
+function stopRotate() {
+    restartButton.classList.remove("rotate-scale");
 }
 
 
 function openModal() {
     attachResults();
 
-    setTimeout( () => {
-        modal.style.display = "block";
-    }, 600);
+    setTimeout(displayModal, 600);
 }
-  
+
+
+function displayModal() {
+    modal.style.display = "block";
+}
+
   
 function attachResults() {
       let stars = document.querySelector(".stars").innerHTML;
@@ -369,7 +386,7 @@ function restart() {
 }
 
 
-restartButton.addEventListener("click", restart);
+restartButton.addEventListener("click", rotateRestartIcon);
 
 modalButton.addEventListener("click", openModal); //TEMP
 
