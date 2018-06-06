@@ -1,5 +1,14 @@
 const deck = document.querySelector(".deck");
-const iconsUnique = ["fa-gem", "fa-crow", "fa-fighter-jet", "fa-binoculars", "fa-shoe-prints", "fa-skull", "fa-hand-paper", "fa-wrench"];
+const iconsUnique = [
+    "fa-gem",
+    "fa-crow",
+    "fa-fighter-jet",
+    "fa-binoculars",
+    "fa-shoe-prints",
+    "fa-skull",
+    "fa-hand-paper",
+    "fa-wrench"
+];
 const icons = [...iconsUnique, ...iconsUnique];
 const star1 = $(".stars li:nth-child(1) i");
 const star2 = $(".stars li:nth-child(2) i");

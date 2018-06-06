@@ -2,19 +2,43 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [How The Game Works](#howthegameworks)
+* [How to play](#howtoplay)
+* [Demo](#demo)
+* [Installation](#installation)
+* [Credits](#credits)
 
-## Instructions
+## How The Game Works
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+The game board consists of sixteen "cards" arranged in a grid. The deck is made up of eight different pairs of cards, each with different symbols on one side. The cards are arranged randomly on the grid with the symbol face down. The gameplay rules are very simple: flip over two hidden cards at a time to locate the ones that match!
 
-To get started, open `js/app.js` and start building out the app's functionality
+*Each turn*:
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+- The player flips one card over to reveal its underlying symbol.
+- The player then turns over a second card, trying to find the corresponding card with the same symbol.
+- If the cards match, both cards stay flipped over.
+- If the cards do not match, both cards are flipped face down.
 
-## Contributing
+## How to play
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+> Game starts when you click on the deck.
+> The less moves you make, the better rating you get.
+> One card flip = one move.
+> Click on the re-do icon to start from scratch.
+> The game ends once all cards have been correctly matched.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## Demo
+
+[Memory Game on CodePen](https://codepen.io/wojtek-zajac/full/zaBgYm/)
+
+## Installation
+
+[Clone](https://github.com/wojtek-zajac/memory-game.git)/[Download](https://github.com/wojtek-zajac/memory-game.git) the repo and open `index.html`.
+
+
+## Credits
+
+> Initial markup and styles from [Udacity](https://eu.udacity.com/)
+> Card icons from [Font Awesome](https://fontawesome.com/)
+> Background pattern from [Subtle Patterns](https://www.toptal.com/designers/subtlepatterns/)
+> Some animations generated on [Animista](http://animista.net/) and [AngryTools](http://angrytools.com/)
