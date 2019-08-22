@@ -28,10 +28,13 @@ The game board consists of sixteen "cards" arranged in a grid. The deck is made 
 * The game ends once all cards have been correctly matched.
 
 ## Demo
+https://wojtek-zajac.github.io/memory-game/
 
-[Memory Game on CodePen](https://codepen.io/wojtek-zajac/full/zaBgYm/)
+or
 
-## Installation
+https://codepen.io/wojtek-zajac/full/zaBgYm/
+
+## Installation and Run
 
 [Clone](https://github.com/wojtek-zajac/memory-game.git)/[Download](https://github.com/wojtek-zajac/memory-game.git) the repo and open `index.html`.
 
